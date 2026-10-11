@@ -1,39 +1,43 @@
-# Zadanie B1: Sito Eratostenesa
+# Task B1: Sieve of Eratosthenes
 
-Rozwiązanie algorytmiczne zadania polegającego na efektywnym zliczaniu liczb pierwszych w zadanych przedziałach oraz wyznaczaniu najmniejszych dzielników pierwszych.
+An algorithmic solution for efficiently counting prime numbers within given ranges and finding the smallest prime divisors.
 
-## Opis problemu
+## Problem Description
 
-Zadanie wymaga przetworzenia dużej liczby zapytań ($1 \le z \le 10^7$) dotyczących przedziałów $[a, b]$ (gdzie $1 \le a \le b \le 10^7$). Dla każdego zapytania program musi zwrócić:
-1. Liczbę liczb pierwszych znajdujących się w przedziale $[a, b]$ (włącznie z granicami).
-2. Najmniejszy dzielnik pierwszy liczby $a$ (lub samą liczbę $a$, jeśli jest pierwsza bądź wynosi $1$).
-3. Najmniejszy dzielnik pierwszy liczby $b$ (lub samą liczbę $b$, jeśli jest pierwsza bądź wynosi $1$).
+The task requires processing a large number of queries ($1 \le z \le 10^7$) concerning ranges $[a, b]$ (where $1 \le a \le b \le 10^7$). For each query, the program must output:
 
-### Ograniczenia techniczne:
-- **Dostępna pamięć:** $128\text{ MB}$
-- **Język programowania:** C
-- **Maksymalna wartość liczb:** $10^7$
+1. The number of prime numbers located in the range $[a, b]$ (inclusive).
+2. The smallest prime factor of number $a$ (or the number $a$ itself if it is prime or equals $1$).
+3. The smallest prime factor of number $b$ (or the number $b$ itself if it is prime or equals $1$).
 
-## Podejście algorytmiczne
+### Technical Constraints:
 
-Ze względu na restrykcyjne limity czasowe przy $10^7$ zapytaniach, zastosowano optymalizację opartą na dwóch technikach:
-- **Tablica SPF (Smallest Prime Factor):** Zmodyfikowane Sito Eratostenesa, które dla każdej liczby zapisuje jej najmniejszy dzielnik pierwszy.
-- **Sumy prefixowe:** Tablica pomocnicza przechowująca kumulatywną liczbę liczb pierwszych, co pozwala na odpowiedź na każde zapytanie o przedział w czasie stałym $\mathcal{O}(1)$.
-- **Złożoność pamięciowa:** Dwie tablice wielkości $10^7$ typu `int` mieszczą się w około $80\text{ MB}$, co bezpiecznie mieści się w limicie $128\text{ MB}$.
+* **Available memory:** $128\text{ MB}$
+* **Programming language:** C
+* **Maximum value of numbers:** $10^7$
 
-## Kompilacja i uruchomienie
+## Algorithmic Approach
 
-Aby skompletować i uruchomić program na systemie Linux z najwyższą optymalizacją kompilatora, użyj polecenia:
+Due to strict time limits with up to $10^7$ queries, the solution implements two key techniques:
+
+* **SPF Array (Smallest Prime Factor):** A modified Sieve of Eratosthenes that records the smallest prime divisor for each number.
+* **Prefix Sums:** An auxiliary array tracking the cumulative count of prime numbers, allowing each range query to be answered in constant time $\mathcal{O}(1)$.
+* **Memory Complexity:** Two arrays of size $10^7$ of type `int` consume roughly $80\text{ MB}$, safely fitting within the $128\text{ MB}$ limit.
+
+## Compilation and Running
+
+To compile and run the program on Linux with maximum compiler optimization, use the following commands:
 
 ```bash
 gcc -O3 rozwiazanie.c -o rozwiazanie
 ./rozwiazanie
 ```
 
-## Przykład
+## Example
 
-### Wejście:
-```text
+### Input:
+
+```
 8
 1 10
 1 100
@@ -45,8 +49,9 @@ gcc -O3 rozwiazanie.c -o rozwiazanie
 221 323
 ```
 
-### Wyjście:
-```text
+### Output:
+
+```
 4 1 2
 25 1 2
 72 5 3
