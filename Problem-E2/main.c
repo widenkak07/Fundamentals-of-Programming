@@ -3,18 +3,27 @@ int a[100000];
 int n, z, l, m,x;
 
 void selectionSort(int a[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        int minInx = i;
-        for (int j = i + 1; j < n; j++) {
-            if (a[j] < a[minInx]) {
-                minInx = j;
-            }
+    int left = 0, right = n - 1;
+    while (left < right) {
+        int minIdx = left, maxIdx = left;
+        for (int j = left; j <= right; j++) {
+            if (a[j] < a[minIdx]) minIdx = j;
+            if (a[j] > a[maxIdx]) maxIdx = j;
         }
-        if (minInx != i) {
-            int swap = a[i];
-            a[i] = a[minInx];
-            a[minInx] = swap;
-        }
+        int tmp = a[left];
+        a[left] = a[minIdx];
+        a[minIdx] = tmp;
+
+
+        if (maxIdx == left) maxIdx = minIdx;
+
+
+        tmp = a[right];
+        a[right] = a[maxIdx];
+        a[maxIdx] = tmp;
+
+        left++;
+        right--;
     }
 }
 
@@ -24,7 +33,7 @@ int hasTreeSumZero(int a[], int n) {
         if (i > 0 && a[i] == a[i-1]) continue;
         l = i; m = n - 1;
         while (l <= m) {
-            long long sum = (long long)a[i] + a[l] + a[m];
+            int sum = a[i] + a[l] + a[m];
             if (sum == 0) { x = i; return 1; }
             else if (sum > 0) m--;
             else l++;
