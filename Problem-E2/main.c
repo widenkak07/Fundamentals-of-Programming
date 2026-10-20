@@ -1,38 +1,37 @@
 #include <stdio.h>
 int a[100000];
-int n, z, l, m, i, j;
+int n, z, l, m,x;
 
 void selectionSort(int a[], int n) {
-    for (i = 0; i < n-1; i++) {
+    for (int i = 0; i < n - 1; i++) {
         int minInx = i;
-        for (j = i+1; j < n; j++) {
+        for (int j = i + 1; j < n; j++) {
             if (a[j] < a[minInx]) {
                 minInx = j;
             }
         }
-        int swap = a[i];
-        a[i] = a[minInx];
-        a[minInx] = swap;
+        if (minInx != i) {
+            int swap = a[i];
+            a[i] = a[minInx];
+            a[minInx] = swap;
+        }
     }
 }
 
 int hasTreeSumZero(int a[], int n) {
-    for (i = 0; i < n - 1; i++) {
-        l = i, m = n - 1;
+    for (int i = 0; i < n; i++) {
+        if (a[i] > 0) break;
+        if (i > 0 && a[i] == a[i-1]) continue;
+        l = i; m = n - 1;
         while (l <= m) {
-            int sum = a[i] + a[l] + a[m];
-            if (sum == 0) {
-                return 1;
-            } else if (sum > 0) {
-                m--;
-            } else if (sum < 0) {
-                l++;
-            }
+            long long sum = (long long)a[i] + a[l] + a[m];
+            if (sum == 0) { x = i; return 1; }
+            else if (sum > 0) m--;
+            else l++;
         }
     }
     return 0;
 }
-
 int main() {
     scanf("%d", &z);
     while (z--) {
@@ -48,7 +47,7 @@ int main() {
         if (hasTreeSumZero(a, n) == 0) {
             printf("NO\n");
         } else {
-            printf("YES %d %d %d ", i, l, m);
+            printf("YES %d %d %d\n", x, l, m);
         }
     }
     return 0;
