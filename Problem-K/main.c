@@ -57,8 +57,7 @@ int main()
             continue;
         }
 
-        printf("%d\n", len);
-        printf("%.*f\n", d, average(sum, len));
+        printf("%d %.*f\n", len, d, average(sum, len));
         for (int i = 0; i < len; i++) {
             printf("%d", *(values + start + i));
             putchar(i + 1 < len ? ' ' : '\n');
