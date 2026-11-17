@@ -32,39 +32,22 @@ int find_best(int n, int k, int b, int *values, int *best_start, long long *best
     return best_len;
 }
 
-long long rounded_average(long long sum, int len, int d)
+double average(long long sum, int len)
 {
-    __int128 power = 1;
-    for (int i = 0; i < d; i++)
-        power = power * 10;
-    return (long long)((2 * sum * power + len) / (2 * (__int128)len));
-}
-
-int read_number()
-{
-    int c = getchar();
-    while (c != EOF && (c < '0' || c > '9'))
-        c = getchar();
-    int x = 0;
-    while (c >= '0' && c <= '9') {
-        x = x * 10 + (c - '0');
-        c = getchar();
-    }
-    return x;
+    return (double)sum / len;
 }
 
 int main()
 {
     int *values = malloc(4 * 1000000);
-    int z = read_number();
 
+    int z;
+    scanf("%d", &z);
     for (int test = 0; test < z; test++) {
-        int n = read_number();
-        int k = read_number();
-        int b = read_number();
-        int d = read_number();
+        int n, k, b, d;
+        scanf("%d %d %d %d", &n, &k, &b, &d);
         for (int i = 0; i < n; i++)
-            *(values + i) = read_number();
+            scanf("%d", values + i);
 
         int start;
         long long sum;
@@ -74,12 +57,8 @@ int main()
             continue;
         }
 
-        long long power = 1;
-        for (int i = 0; i < d; i++)
-            power = power * 10;
-        long long average = rounded_average(sum, len, d);
         printf("%d\n", len);
-        printf("%lld.%0*lld\n", average / power, d, average % power);
+        printf("%.*f\n", d, average(sum, len));
         for (int i = 0; i < len; i++) {
             printf("%d", *(values + start + i));
             putchar(i + 1 < len ? ' ' : '\n');
