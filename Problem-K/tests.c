@@ -52,6 +52,6 @@ int main()
     sprintf(text, "%.*f", 1, average(1, 4));
     assert(strcmp(text, "0.2") == 0);
  
-    printf("all tests passed\n");
+    printf("All tests passed!\n");
     return 0;
 }
