@@ -1,57 +1,50 @@
-
 #include <assert.h>
 #include <stdio.h>
-#include <string.h>
- 
+
 int find_best(int n, int k, int b, int *values, int *best_start, long long *best_sum);
 double average(long long sum, int len);
- 
+
 int main()
 {
     int start;
     long long sum;
- 
+
     int a[] = {1, 8, 3, 2, 5, 1, 2, 3};
     assert(find_best(8, 2, 1, a, &start, &sum) == 3);
     assert(start == 1);
     assert(sum == 13);
- 
+
     int b[] = {1, 8, 2, 5, 1, 2};
     assert(find_best(6, 3, 0, b, &start, &sum) == 0);
- 
+
     int c[] = {2, 4, 6};
     assert(find_best(3, 2, 0, c, &start, &sum) == 3);
     assert(start == 0);
     assert(sum == 12);
- 
+
     int d[] = {4, 1, 2, 1, 6};
     assert(find_best(5, 2, 0, d, &start, &sum) == 1);
     assert(start == 4);
     assert(sum == 6);
- 
+
     int e[] = {1, 2, 2, 1};
     assert(find_best(4, 2, 1, e, &start, &sum) == 3);
     assert(start == 1);
     assert(sum == 5);
- 
+
     int f[] = {7};
     assert(find_best(1, 5, 0, f, &start, &sum) == 0);
- 
+
     int g[] = {1000000, 999999, 0};
     assert(find_best(3, 1, 0, g, &start, &sum) == 3);
     assert(start == 0);
     assert(sum == 1999999);
- 
-    char text[50];
-    sprintf(text, "%.*f", 3, average(13, 3));
-    assert(strcmp(text, "4.333") == 0);
-    sprintf(text, "%.*f", 1, average(5, 3));
-    assert(strcmp(text, "1.7") == 0);
-    sprintf(text, "%.*f", 2, average(12, 3));
-    assert(strcmp(text, "4.00") == 0);
-    sprintf(text, "%.*f", 1, average(1, 4));
-    assert(strcmp(text, "0.2") == 0);
- 
+
+    assert(average(12, 3) == 4.0);
+    assert(average(1, 4) == 0.25);
+    assert(average(5, 2) == 2.5);
+    assert(average(0, 1) == 0.0);
+
     printf("All tests passed!\n");
     return 0;
 }
